@@ -23,6 +23,10 @@ end
 function CAddonTemplateGameMode:InitGameMode()
 	print( "Template addon is loaded." )
 
+		ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( CHoldoutGameMode, "OnGameRulesStateChange" ), self )
+
+	GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 5 )
+	GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 0 )
 	GameRules:SetTimeOfDay( 0.75 )
 	GameRules:SetHeroRespawnEnabled( false )
 	--GameRules:SetUseUniversalShopMode( true )
@@ -68,4 +72,32 @@ function CAddonTemplateGameMode:OnThink()
 		return nil
 	end
 	return 1
+end
+
+function CHoldoutGameMode:OnGameRulesStateChange()
+	local nNewState = GameRules:State_Get()
+	if nNewState == DOTA_GAMERULES_STATE_STRATEGY_TIME then
+		--print( "OnGameRulesStateChange: Strategy Time" )
+		self:ForceAssignHeroes()
+
+	elseif nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
+		--print( "OnGameRulesStateChange: Hero Selection" )
+
+	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
+		--print( "OnGameRulesStateChange: Pre Game" )
+
+	elseif nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+		--print( "OnGameRulesStateChange: Game In Progress" )
+	end
+end
+
+function CAddonTemplateGameMode:ForceAssignHeroes()
+	for nPlayerID = 0, ( DOTA_MAX_TEAM_PLAYERS - 1 ) do
+		if PlayerResource:GetTeam( nPlayerID ) == DOTA_TEAM_GOODGUYS then
+			local hPlayer = PlayerResource:GetPlayer( nPlayerID )
+			if hPlayer and not PlayerResource:HasSelectedHero( nPlayerID ) then
+				hPlayer:MakeRandomHeroSelection()
+			end
+		end
+	end
 end
