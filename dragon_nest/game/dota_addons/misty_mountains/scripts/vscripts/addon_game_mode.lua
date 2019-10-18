@@ -19,7 +19,7 @@ end
 function CAddonTemplateGameMode:InitGameMode()
 	print( "Template addon is loaded." )
 
-		ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( CHoldoutGameMode, "OnGameRulesStateChange" ), self )
+		ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( CAddonTemplateGameMode, "OnGameRulesStateChange" ), self )
 
 	GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 5 )
 	GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 0 )
