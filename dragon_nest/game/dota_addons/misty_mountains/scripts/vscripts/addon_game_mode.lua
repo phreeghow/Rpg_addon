@@ -70,7 +70,7 @@ function CAddonTemplateGameMode:OnThink()
 	return 1
 end
 
-function CHoldoutGameMode:OnGameRulesStateChange()
+function CAddonTemplateGameMode:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
 	if nNewState == DOTA_GAMERULES_STATE_STRATEGY_TIME then
 		--print( "OnGameRulesStateChange: Strategy Time" )
