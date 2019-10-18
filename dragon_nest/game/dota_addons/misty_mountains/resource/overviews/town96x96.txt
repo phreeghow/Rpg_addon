@@ -1,0 +1,8 @@
+town96x96
+{
+	material materials/overviews/town96x96.vmat
+	pos_x -12288
+	pos_y 12288
+	scale 24.000
+}
+
