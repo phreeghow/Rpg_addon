@@ -4,46 +4,207 @@
 	"Version"		"1"
 
 	//=================================================================================================================
-	// Templar Assassin: Refraction Holdout
+	// Mountains Golems
 	//=================================================================================================================
-	"templar_assassin_refraction_holdout"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+	"death_passive"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "abilities/death_passive"
+        "AbilityTextureName"            "rubick_empty1"
+        "MaxLevel"                      "1"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+        "IsOnCastBar"                   "0"
 
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"17.0 17.0 17.0 17.0"
+        // Special
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "spawn_delay"                 "0.03"
+            }
+        }
+    }
 
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"100"
-		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"damage_absorb"				"200 300 400 500"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"bonus_damage"				"20 40 60 80"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"duration"					"17.0 17.0 17.0 17.0"
-			}
-		}
-	}
+	//=================================================================================================================
+    // No health bar
+    //=================================================================================================================
+    "no_health_bar"
+    {
+        "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+        
+        "BaseClass"             "ability_datadriven"
+
+        "IsOnCastBar"                   "0"
+        
+        "Modifiers"
+        {
+            "modifier_no_health_bar"
+            {
+                "Passive" "1"
+                "States"
+                {
+                    "MODIFIER_STATE_NO_HEALTH_BAR"          "MODIFIER_STATE_VALUE_ENABLED"
+                }
+            }
+        }
+    }
+
+    //=================================================================================================================
+    // Golem Boulder
+    //=================================================================================================================
+    "golem_boulder"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_lua"
+        "AbilityTextureName"            "brewmaster_earth_hurl_boulder"
+        "ScriptFile"                    "abilities/golem_boulder"
+
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+        "AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+
+        "IsOnCastBar"                   "0"
+
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastRange"              "1000"
+        //"AbilityCastAnimation"          "ACT_DOTA_CAST_ABILITY_1"   // Activity
+        //"AnimationPlaybackRate"         "1"                       // Animation speed multiplier
+        "AnimationIgnoresModelScale"    "1"
+
+        "MaxLevel"                      "1"
+
+         // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastRange"              "900"
+        "AbilityCastPoint"              "0.25"
+        
+        // Time     
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "0"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "25"
+                
+        // Special
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"          "FIELD_FLOAT"
+                "duration"          "0.5"
+            }     
+
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "projectile_speed"      "900"
+            }  
+            "03"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "radius"                "125"
+            }    
+            "04"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "area_duration"         "0.25"
+            }
+            "05"
+            {
+                "var_type"                  "FIELD_FLOAT"
+                "animation_time"            "0.25"
+            }
+            "06"
+            {
+                "var_type"                              "FIELD_FLOAT"
+                "shapeshift_animation_time"            "0.3"
+            }
+        }
+    }
+
+    //=================================================================================================================
+    // Golem: Waves
+    //=================================================================================================================
+    "golem_waves"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "abilities/golem_waves"
+        "AbilityTextureName"            "tidehunter_gush"
+
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+        "AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+        "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"          "SPELL_DISPELLABLE_NO"
+        "FightRecapLevel"               "1"
+        "AbilityCastAnimation"          "ACT_DOTA_SWIM_IDLE"
+
+        "IsOnCastBar"                   "0"
+
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastRange"              "0"
+        "AbilityCastPoint"              "0"
+        "AnimationIgnoresModelScale"    "1"
+        "AnimationPlaybackRate"         "1.0"
+        
+        // Time
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "12"
+        "AbilityChannelTime"            "1.75"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0"
+
+        // Special
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "projectile_speed"  "750"
+            }
+            "02"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "projectile_radius" "150"
+            }
+            "03"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "cast_range"        "700"
+            }
+            "04"
+            {
+                "var_type"          "FIELD_FLOAT"
+                "tick_interval"     "1.5"
+            }
+            "05"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "pulses"            "6"
+            }    
+            "06"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "damage"            "100"
+            }
+            "07"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "modelscale"            "10"
+            }  
+        }
+    }
 }
